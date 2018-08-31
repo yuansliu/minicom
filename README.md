@@ -52,7 +52,7 @@ When decompressing, only two options `-d` and `-t` can be used. Other options us
 Under review
 
 ## Citation
-Yuansheng Liu, Zuguo Yu, Jinyan Li; Index suffix-prefix overlaps by $(w, k)$-minimizer to generate long contigs for reads compression. 2018.
+Yuansheng Liu, Zuguo Yu, Jinyan Li; Index suffix-prefix overlaps by (w, k)-minimizer to generate long contigs for reads compression. 2018.
 
 ### Contacts
 If any bugs during you run our code, please email to <yyuanshengliu@gmail.com>
