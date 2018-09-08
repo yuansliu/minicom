@@ -15,26 +15,25 @@ To compress:
 
     ./minicom -r IN.fastq 					
     ./minicom -r IN.fastq -p 				#order-preserving mode
-	./minicom -1 IN_1.fastq -2 IN_2.fastq 	#preserving paired-end information		
+	./minicom -1 IN_1.fastq -2 IN_2.fastq 				#preserving paired-end information		
 
 Minicom creates compressed file `IN_comp.minicom`, `IN_comp_order.minicom` and `IN_comp_pe.minicom` respectively.
 
 Options for compression
 
-	-h 			print help message
-	-t 			number of threads, default: 24 
-	-r 			reads file 
-	-1 			reads file of paired-end reads [used for paired-end]
-	-2 			reads file of paired-end reads [used for paired-end]
-	-k 			length of k-mer, k <= 31, default: 31
-	-e 			difference threshold, default: 4
-	-m 			number of minimizer, default 6
-	-w 			window size, default L/2-k, where L is the length of reads
-	-s 			number of indexed substring, default L/17 for L > 80; otherwise L/11
-	-S 			step size of threshold, default S = e
-	-E 			maximum threshold, default L/2
-	-p 			order-preserving mode [only used for compressing single FASTQ file]
-	-d 			a compressed file .minicom [only for decompression]
+	-h 		print help message
+	-t 		number of threads, default: 24 
+	-r 		reads file 
+	-1 		reads file of paired-end reads [used for paired-end]
+	-2 		reads file of paired-end reads [used for paired-end]
+	-k 		length of k-mer, k <= 31, default: 31
+	-e 		difference threshold, default: 4
+	-m 		number of minimizer, default 6
+	-w 		window size, default L/2-k, where L is the length of reads
+	-s 		number of indexed substring, default L/17 for L > 80; otherwise L/11
+	-S 		step size of threshold, default S = e
+	-E 		maximum threshold, default L/2
+	-p 		order-preserving mode [only used for compressing single FASTQ file]
 
 To decompress:
 
