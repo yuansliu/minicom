@@ -28,12 +28,9 @@ Options:
 	-p 		order-preserving mode [only used for compressing single FASTQ file]
 
 Decompression - decompresses reads. Output written to '_dec.reads' file
-./harc -d file.minicom 
+./minicom -d file.minicom 
 	-d 		a compressed file .minicom [only for decompression]
  	-t 		number of threads, default: 24
-
-Help (this message)
-sh minicom.sh -h
 
 See README and more supplementary information at:
 https://github.com/yuansliu/minicom
