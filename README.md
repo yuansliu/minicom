@@ -1,3 +1,6 @@
+# Acknowledgements
+We thank Prof. Carl Kingsford for providing the the reference transcripts. We are also gratefull to Prof. Rob Patro and Dr. Hirak Sarkar for runing Quark. (Will be moved to acknowledgements part of the paper.)
+
 # minicom
 
 Minicom is a tool for compressing short reads in FASTQ. The minicom program is written in C++11 and works on Linux. It is availble under an open-source license.
@@ -15,7 +18,7 @@ To compress:
 
     ./minicom -r IN.fastq 					
     ./minicom -r IN.fastq -p 				#order-preserving mode
-	./minicom -1 IN_1.fastq -2 IN_2.fastq 				#preserving paired-end information		
+	./minicom -1 IN_1.fastq -2 IN_2.fastq 			#preserving paired-end information		
 
 Minicom creates compressed file `IN_comp.minicom`, `IN_comp_order.minicom` and `IN_comp_pe.minicom` respectively.
 
