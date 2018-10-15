@@ -1,6 +1,3 @@
-# Acknowledgements
-We thank Prof. Carl Kingsford for providing the the reference transcripts. We are also gratefull to Prof. Rob Patro and Dr. Hirak Sarkar for runing Quark. (Will be moved to acknowledgements part of the paper.)
-
 # minicom
 
 Minicom is a tool for compressing short reads in FASTQ. The minicom program is written in C++11 and works on Linux. It is availble under an open-source license.
