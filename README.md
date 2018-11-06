@@ -39,8 +39,8 @@ To decompress:
 
 	./minicom -d IN.minicom [-t number of threads, default 24]
 
-## Status
-Under review
+<!-- ## Status -->
+<!-- Under review -->
 
 ## Citation
 Yuansheng Liu, Zuguo Yu, Marcel E. Dinger, Jinyan Li; Index suffix-prefix overlaps by (w, k)-minimizer to generate long contigs for reads compression. Bioinformatics, 2018, Accepted.
