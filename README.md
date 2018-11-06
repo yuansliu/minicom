@@ -43,13 +43,9 @@ To decompress:
 Under review
 
 ## Citation
-Yuansheng Liu, Zuguo Yu, Marcel E. Dinger, Jinyan Li; Index suffix-prefix overlaps by (w, k)-minimizer to generate long contigs for reads compression. 2018.
+Yuansheng Liu, Zuguo Yu, Marcel E. Dinger, Jinyan Li; Index suffix-prefix overlaps by (w, k)-minimizer to generate long contigs for reads compression. Bioinformatics, 2018, Accepted.
 
 ### Contacts
 If any bugs during you run our code, please email to <yyuanshengliu@gmail.com>
 
 ---
-
-I thank my families and apologize to my babies.
-
-<img src="https://sites.google.com/site/yyuanshengliu/home/babies/mybabies.jpeg">
