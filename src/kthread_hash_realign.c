@@ -530,9 +530,9 @@ void kt_realign_hash_for(int n_threads, reads_t *reads, int index, int max_thres
 	pthread_t *tid;
 	t.reads = reads, t.n_threads = n_threads, t.index = index, t.threshold = max_threshold, t.dict = dict, t.read = read;
 
-	t.w = (ktf_realign_hash_worker_t*)alloca(n_threads * sizeof(ktf_realign_hash_worker_t));
-	t.dict_lock = (pthread_mutex_t*)alloca(num_locks * sizeof(pthread_mutex_t));
-	t.read_lock = (pthread_mutex_t*)alloca(num_locks * sizeof(pthread_mutex_t));
+	t.w = (ktf_realign_hash_worker_t*)calloc(n_threads, sizeof(ktf_realign_hash_worker_t));
+	t.dict_lock = (pthread_mutex_t*)calloc(num_locks, sizeof(pthread_mutex_t));
+	t.read_lock = (pthread_mutex_t*)calloc(num_locks, sizeof(pthread_mutex_t));
 	for (int j = 0; j < num_locks; ++j) {
 		pthread_mutex_init(&t.dict_lock[j], 0);
 		pthread_mutex_init(&t.read_lock[j], 0);
@@ -557,6 +557,10 @@ void kt_realign_hash_for(int n_threads, reads_t *reads, int index, int max_thres
 	for (i = 0; i < n_threads; ++i) pthread_join(tid[i], 0);
 
 	// fprintf(stderr, "after pthread_join()...\n");
+	free(t.w);
+	free(t.dict_lock);
+	free(t.read_lock);
+
 	free(t.mask);  
 	free(t.mask1);
 	free(t.revmask);
