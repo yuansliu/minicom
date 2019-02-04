@@ -517,7 +517,7 @@ void kt_find_next_for(int n_threads, reads_t *reads, int index, int win, int win
 		for (int j = 0; j < reads->clusters[index][i].n; ++j) {
 			pthread_mutex_init(&t.mutex[i][j], 0);
 		}
-	}
+	} 
 
 	int num_mutex = (1<<reads->b);
 	// t.lock = (pthread_mutex_t*)alloca(num_mutex * sizeof(pthread_mutex_t));
