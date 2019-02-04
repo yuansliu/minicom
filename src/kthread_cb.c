@@ -507,22 +507,27 @@ void kt_find_next_for(int n_threads, reads_t *reads, int index, int win, int win
 		memset(t.flag[k], 0, reads->clusters[index][k].n * sizeof(bool));
 	}
 
-	t.w = (ktf_cb_worker_t*)alloca(n_threads * sizeof(ktf_cb_worker_t));
-	t.mutex = (pthread_mutex_t**)alloca(n_threads * sizeof(pthread_mutex_t*));
+	// t.w = (ktf_cb_worker_t*)alloca(n_threads * sizeof(ktf_cb_worker_t));
+	t.w = (ktf_cb_worker_t*)calloc(n_threads, sizeof(ktf_cb_worker_t));
+	// t.mutex = (pthread_mutex_t**)alloca(n_threads * sizeof(pthread_mutex_t*));
+	t.mutex = (pthread_mutex_t**)calloc(n_threads, sizeof(pthread_mutex_t*));
 	for (int i = 0; i < n_threads; ++i) {
-		t.mutex[i] = (pthread_mutex_t*)alloca(reads->clusters[index][i].n * sizeof(pthread_mutex_t));
+		// t.mutex[i] = (pthread_mutex_t*)alloca(reads->clusters[index][i].n * sizeof(pthread_mutex_t));
+		t.mutex[i] = (pthread_mutex_t*)calloc(reads->clusters[index][i].n, sizeof(pthread_mutex_t));
 		for (int j = 0; j < reads->clusters[index][i].n; ++j) {
 			pthread_mutex_init(&t.mutex[i][j], 0);
 		}
 	}
 
 	int num_mutex = (1<<reads->b);
-	t.lock = (pthread_mutex_t*)alloca(num_mutex * sizeof(pthread_mutex_t));
+	// t.lock = (pthread_mutex_t*)alloca(num_mutex * sizeof(pthread_mutex_t));
+	t.lock = (pthread_mutex_t*)calloc(num_mutex, sizeof(pthread_mutex_t));
 	for (int i = 0; i < num_mutex; ++i) {
 		pthread_mutex_init(&t.lock[i], 0);
 	}
 
-	tid = (pthread_t*)alloca(n_threads * sizeof(pthread_t));
+	// tid = (pthread_t*)alloca(n_threads * sizeof(pthread_t));
+	tid = (pthread_t*)calloc(n_threads, sizeof(pthread_t));
 	for (i = 0; i < n_threads; ++i) 
 		t.w[i].t = &t, t.w[i].i = 0, t.w[i].tid = i, t.w[i].n = reads->clusters[index][i].n;
 
@@ -548,7 +553,12 @@ void kt_find_next_for(int n_threads, reads_t *reads, int index, int win, int win
 
 	for (int k = 0; k < n_threads; ++k) {
 		free(t.flag[k]);
+		free(t.mutex[k]);
 	}
+	free(t.mutex);
+	free(t.lock);
+	free(t.w);
+	free(tid);
 	free(t.flag);
 }
 
