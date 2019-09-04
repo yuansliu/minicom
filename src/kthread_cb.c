@@ -118,6 +118,7 @@ void construct_ref2(reads_t *reads, cluster_t *p) {
 	char *temp_str = (char*)calloc((readlen + 1), sizeof(char));
 	int rid, pos, dir;
 
+	int rend = 0;
 	for (int k = 0; k < p->n; ++k) { // p->a[k]
 		uint64_t y = p->a[k];
 		rid = y>>32;
@@ -130,10 +131,13 @@ void construct_ref2(reads_t *reads, cluster_t *p) {
 		for (int s = 0; s < readlen; ++s) {
 			++count_table[seq_nt4_table[(uint8_t)temp_str[s]]][pos + s];
 		}
+		if (pos + readlen > rend) {
+			rend = pos + readlen;
+		}
 	}
 	char *ref = (char*)calloc(count_table_len, sizeof(char));
 	int max_count;
-	for (int s = 0; s < count_table_len; ++s) {
+	for (int s = 0; s < rend; ++s) {
 		ref[s] = 'A';
 		max_count = count_table[0][s];
 		for (int k = 1; k < 4; ++k) {
@@ -143,11 +147,12 @@ void construct_ref2(reads_t *reads, cluster_t *p) {
 			}
 		}
 		// fprintf(stderr, "%d,\n", max_count);
-		if (max_count == 0) {
-			ref[s] = '\0';
-			break;
-		}
+		// if (max_count == 0) {
+		// 	ref[s] = '\0';
+		// 	break;
+		// }
 	}
+	ref[rend] = '\0';
 	// fprintf(stderr, "after count_table()...\n");
 	p->ref = (char*)calloc(strlen(ref) + 1, sizeof(char));
 	strcpy(p->ref, ref);

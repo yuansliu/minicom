@@ -75,7 +75,7 @@ void construct_ref(kt_for_t *t, reads_t *reads, cluster_t *p, int n, int index, 
 	for (int i = 0; i < 4; ++i) {
 		count_table[i] = (uint32_t*)calloc(count_table_len, sizeof(uint32_t));
 		// memset(count_table[i], 0, count_table_len * sizeof(uint32_t));
-	}
+	} 
 	char *temp_str = (char*)calloc((readlen + 1), sizeof(char));
 	int rid, pos, dir, pos_0 = readlen;
 
@@ -264,6 +264,8 @@ void construct_ref(kt_for_t *t, reads_t *reads, cluster_t *p, int n, int index, 
 			// }
 		// }
 
+		int rend = 0;
+
 		for (int i = 0; i < p->n; ++i) {
 			uint64_t y = p->a[i];
 			rid = y>>32;
@@ -278,6 +280,10 @@ void construct_ref(kt_for_t *t, reads_t *reads, cluster_t *p, int n, int index, 
 
 			for (int s = 0; s < readlen; ++s) {
 				++count_table[seq_nt4_table[(uint8_t)temp_str[s]]][pos + s];
+			}
+
+			if (pos + readlen > rend) {
+				rend = pos + readlen;
 			}
 		}
 
@@ -310,7 +316,7 @@ void construct_ref(kt_for_t *t, reads_t *reads, cluster_t *p, int n, int index, 
 		}
 		int sv = s, r;
 		// if (debug) fprintf(stderr, "ref_len: %d\n", ref_len);
-		for (r = 0; s < ref_len; ++s, ++r) {
+		for (r = 0; s < rend; ++s, ++r) {
 			p->ref[r] = 'A';
 			max_count = count_table[0][s];
 			for (int k = 1; k < 4; ++k) {
@@ -326,11 +332,11 @@ void construct_ref(kt_for_t *t, reads_t *reads, cluster_t *p, int n, int index, 
 				// fprintf(stderr, "");
 				fprintf(stderr, "max_count: %d; s: %d\n", max_count, s);
 			}*/
-			if (0 == max_count) {
+			// if (0 == max_count) {
 				/*if (debug) fprintf(stderr, "s: %d\n", s);
 				if (debug) fprintf(stderr, "r: %d\n", r);*/
-				break;
-			}
+				// break;
+			// }
 		}
 		p->ref[r] = '\0';
 		
