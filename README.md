@@ -10,9 +10,20 @@ Minicom is a tool for compressing short reads in FASTQ. The minicom program is w
 
 In the script `install.sh`, it downloads the tools *bsc* and *p7zip*. Please make sure the two tools can be ran on your machine.
 
-### Notice
-As "alloca" is used in the source code. It needs more stack memory. Plase check the stack size before running `minicom` using the command `ulimit -s`. If it is very small, please change it by `ulimit -s unlimited`. We are grateful to Prof. Sebastian Deorowicz for reporting the bug.
-    
+# ***Notice***
+1. As "alloca" is used in the source code. It needs more stack memory. Plase check the stack size before running `minicom` using the command `ulimit -s`. If it is very small, please change it by `ulimit -s unlimited`. We are grateful to Prof. Sebastian Deorowicz for reporting the bug.
+
+2. Tomasz Kowalski and Szymon Grabowski reported that minicom fails to correctly decompress several datasets in they work [PgRC](https://www.biorxiv.org/content/10.1101/710822v1). We fixed it in the commit `28a736a`. The bug is caused when construting contigs. We re-ran some datasets and found that the compression ratio is not affected much (see following table).
+
+| Dataset | Compressed file size reported with bug | Latest compressed file size|
+| ------------- | :-------------: | :-------------: |
+| SRR445718 | 126064640 | 126085120 |
+| SRR445724 | 245585920 | 245585920 |
+| SRR445726 | 215572480 | 215582720 |
+| SRR490961 | 122552320 | 122552320 |
+| SRR490976 | 146636800 | 146575360 |
+
+
 ## Usage
 To compress:
 
@@ -46,7 +57,7 @@ To decompress:
 <!-- Under review -->
 
 ## Citation
-Yuansheng Liu, Zuguo Yu, Marcel E. Dinger, Jinyan Li; Index suffix-prefix overlaps by (w, k)-minimizer to generate long contigs for reads compression. Bioinformatics, 2018. https://doi.org/10.1093/bioinformatics/bty936.
+Yuansheng Liu, Zuguo Yu, Marcel E. Dinger, Jinyan Li; Index suffix-prefix overlaps by (w, k)-minimizer to generate long contigs for reads compression. *Bioinformatics*, 35(12):2066-2074, 2019.
 
 ### Contacts
 If any bugs during you run our code, please email to <yyuanshengliu@gmail.com>
