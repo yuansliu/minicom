@@ -1,15 +1,3 @@
-# minicom
-
-Minicom is a tool for compressing short reads in FASTQ. The minicom program is written in C++11 and works on Linux. It is availble under an open-source license.
-
-## Download & Install
-
-	git clone https://github.com/yuansliu/minicom.git
-	cd minicom
-	sh install.sh
-
-In the script `install.sh`, it downloads the tools *bsc* and *p7zip*. Please make sure the two tools can be ran on your machine.
-
 # ***Notice***
 1. As "alloca" is used in the source code. It needs more stack memory. Plase check the stack size before running `minicom` using the command `ulimit -s`. If it is very small, please change it by `ulimit -s unlimited`. We are grateful to Prof. Sebastian Deorowicz for reporting the bug.
 
@@ -23,6 +11,17 @@ In the script `install.sh`, it downloads the tools *bsc* and *p7zip*. Please mak
 | SRR490961 | 122552320 | 122552320 |
 | SRR490976 | 146636800 | 146575360 |
 
+# minicom
+
+Minicom is a tool for compressing short reads in FASTQ. The minicom program is written in C++11 and works on Linux. It is availble under an open-source license.
+
+## Download & Install
+
+	git clone https://github.com/yuansliu/minicom.git
+	cd minicom
+	sh install.sh
+
+In the script `install.sh`, it downloads the tools *bsc* and *p7zip*. Please make sure the two tools can be ran on your machine.
 
 ## Usage
 To compress:
