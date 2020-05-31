@@ -15,6 +15,8 @@
 
 Minicom is a tool for compressing short reads in FASTQ. The minicom program is written in C++11 and works on Linux. It is availble under an open-source license.
 
+Note: Minicom only compresses DNA sequences in the FASTQ file. It does not support to compress the whole FASTQ file.
+
 ## Download & Install
 
 	git clone https://github.com/yuansliu/minicom.git
