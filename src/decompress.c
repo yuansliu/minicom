@@ -132,13 +132,15 @@ void decompress_order(int nth) {
 	char *seq = (char*)alloca((readlen + 1) * sizeof(char));
 	char *temp_char = (char*)alloca(readlen * sizeof(char)), *temp;
 	char *sub_str = (char*)alloca((readlen + 1) * sizeof(char));
-	int seq_num, pos, pre_pos, len, eq_char_num, temp_char_len;
+	int pos, pre_pos, len, eq_char_num, temp_char_len;
 	int dir;
 	// fprintf(stderr, "xxxx\n");
-	
+	uint32_t seq_num;
+
 	int times = 0;
 	// bool flag = false;
-	uint8_t seq_num_bin[4], posbin;
+	uint8_t seq_num_bin[4];
+	uint16_t posbin;
 
 	DNAPOOL curdnapool;
 	curdnapool.n = 4;
@@ -149,14 +151,8 @@ void decompress_order(int nth) {
 	while (true) {
 		// while (fscanf(fppos, "%d", &seq_num) != EOF) {
 		// fprintf(stderr, "yyy\n");
-		fppos.read((char*)(&seq_num_bin[0]), 4 * sizeof(uint8_t));
-		if (fppos.eof()) return;
-
-		seq_num = 0;
-		for (int i = 3; i >= 0; --i) {
-			seq_num <<= 8;
-			seq_num += seq_num_bin[i];
-		}
+		fppos.read((char*)&seq_num, sizeof(uint32_t));
+		if (fppos.eof()) break;
 		// if (flag) fprintf(stderr, "seq_num: %d\n", seq_num);
 
 		pre_pos = 0;
@@ -169,10 +165,10 @@ void decompress_order(int nth) {
 		// 	flag = true;
 		// }
 		uint32_t idx, pre_idx = 0;
-		while (seq_num -- > 0) {
+		for (uint32_t tt = 0; tt < seq_num; ++tt) {
 			++times;
 			// fscanf(fppos, "%d", &pos);
-			fppos.read((char*)&posbin, sizeof(uint8_t));
+			fppos.read((char*)&posbin, sizeof(uint16_t));
 
 			// if (flag) fprintf(stderr, "pos: %d\n", pos);
 			// if (flag) fprintf(stderr, "pos --: %d\n", pos);
@@ -520,13 +516,14 @@ void decompress_nonorder(int nth, FILE *result) {
 	char *seq = (char*)alloca((readlen + 1) * sizeof(char));
 	char *temp_char = (char*)alloca(readlen * sizeof(char)), *temp;
 	char *sub_str = (char*)alloca((readlen + 1) * sizeof(char));
-	int seq_num, pos, pre_pos, len, eq_char_num, temp_char_len;
+	int pos, pre_pos, len, eq_char_num, temp_char_len;
+	uint32_t seq_num;
 	int dir;
 	// fprintf(stderr, "xxxx\n");
 	
 	int times = 0;
 	bool flag = false;
-	uint8_t seq_num_bin[4], posbin;
+	uint16_t posbin;
 
 	DNAPOOL curdnapool;
 	curdnapool.n = 4;
@@ -537,14 +534,9 @@ void decompress_nonorder(int nth, FILE *result) {
 	while (true) {
 		// while (fscanf(fppos, "%d", &seq_num) != EOF) {
 		// fprintf(stderr, "yyy\n");
-		fppos.read((char*)(&seq_num_bin[0]), 4 * sizeof(uint8_t));
-		if (fppos.eof()) return;
+		fppos.read((char*)&seq_num, sizeof(uint32_t));
+		if (fppos.eof()) break;
 
-		seq_num = 0;
-		for (int i = 3; i >= 0; --i) {
-			seq_num <<= 8;
-			seq_num += seq_num_bin[i];
-		}
 		// if (flag) fprintf(stderr, "seq_num: %d\n", seq_num);
 
 		pre_pos = 0;
@@ -556,10 +548,10 @@ void decompress_nonorder(int nth, FILE *result) {
 		// if (strcmp(ref, "TCAACTTTCGATGGCAGTCGCCGTGCCTACCATGGAGACCACGGGTAACGGAGAATCAGGGTTCGATTCCGGAGAGGGAGCCTGAGAAACGGCTAACACCACCAAGGAA") ==0) {
 		// 	flag = true;
 		// }
-		while (seq_num -- > 0) {
+		for (uint32_t tt = 0; tt < seq_num; ++tt) {
 			++times;
 			// fscanf(fppos, "%d", &pos);
-			fppos.read((char*)&posbin, sizeof(uint8_t));
+			fppos.read((char*)&posbin, sizeof(uint16_t));
 
 			// if (flag) fprintf(stderr, "pos: %d\n", pos);
 			// if (flag) fprintf(stderr, "pos --: %d\n", pos);
@@ -817,13 +809,15 @@ void decompress_pe(int nth, FILE *result) {
 	char *seq = (char*)alloca((readlen + 1) * sizeof(char));
 	char *temp_char = (char*)alloca(readlen * sizeof(char)), *temp;
 	char *sub_str = (char*)alloca((readlen + 1) * sizeof(char));
-	int seq_num, pos, pre_pos, len, eq_char_num, temp_char_len;
+	int pos, pre_pos, len, eq_char_num, temp_char_len;
+	uint32_t seq_num;
 	int dir;
 	// fprintf(stderr, "xxxx\n");
 	
 	int times = 0;
 	// bool flag = false;
-	uint8_t seq_num_bin[4], posbin;
+	uint8_t seq_num_bin[4];
+	uint16_t posbin;
 
 	DNAPOOL curdnapool;
 	curdnapool.n = 4;
@@ -837,14 +831,9 @@ void decompress_pe(int nth, FILE *result) {
 	while (true) {
 		// while (fscanf(fppos, "%d", &seq_num) != EOF) {
 		// fprintf(stderr, "yyy\n");
-		fppos.read((char*)(&seq_num_bin[0]), 4 * sizeof(uint8_t));
-		if (fppos.eof()) return;
+		fppos.read((char*)&seq_num, sizeof(uint32_t));
+		if (fppos.eof()) break;
 
-		seq_num = 0;
-		for (int i = 3; i >= 0; --i) {
-			seq_num <<= 8;
-			seq_num += seq_num_bin[i];
-		}
 		// if (flag) fprintf(stderr, "seq_num: %d\n", seq_num);
 
 		pre_pos = 0;
@@ -856,10 +845,10 @@ void decompress_pe(int nth, FILE *result) {
 		// if (strcmp(ref, "TCAACTTTCGATGGCAGTCGCCGTGCCTACCATGGAGACCACGGGTAACGGAGAATCAGGGTTCGATTCCGGAGAGGGAGCCTGAGAAACGGCTAACACCACCAAGGAA") ==0) {
 		// 	flag = true;
 		// }
-		while (seq_num -- > 0) {
+		for (uint32_t tt = 0; tt < seq_num; ++tt) {
 			++times;
 			// fscanf(fppos, "%d", &pos);
-			fppos.read((char*)&posbin, sizeof(uint8_t));
+			fppos.read((char*)&posbin, sizeof(uint16_t));
 
 			// if (flag) fprintf(stderr, "pos: %d\n", pos);
 			// if (flag) fprintf(stderr, "pos --: %d\n", pos);

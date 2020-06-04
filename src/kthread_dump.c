@@ -53,13 +53,9 @@ void print_encode(cluster_t *p, std::ofstream& fpref, uint8bit_v& refbin, std::o
 	// if (flag) fprintf(stderr, "p->n: %lu\n", p->n);
 
 	// fprintf(fppos, "%lu ", p->n);
-	size_t num = p->n;
-	uint8_t posbin;
-	for (int i = 0; i < 4; ++i) {
-		posbin = (uint8_t)(num & ((1<<8)-1));
-		fppos.write((char*)&posbin, sizeof(uint8_t));
-        num >>= 8;
-    }
+	uint32_t num = p->n;
+	uint16_t posbin;
+    fppos.write((char*)&num, sizeof(uint32_t));
 
 	for (int k = 0; k < p->n; ++k) {
 		uint64_t y = p->a[k];
@@ -114,8 +110,8 @@ void print_encode(cluster_t *p, std::ofstream& fpref, uint8bit_v& refbin, std::o
 		fprintf(fpdif_char, "%s\n", en_str);
 		// fprintf(fppos, "%d ", (int)((uint32_t)p->a[k]>>1) - pre_pos);
 		// fprintf(fppos, "%d ", (int)(pos - pre_pos));
-		posbin = (uint8_t)(pos - pre_pos);
-		fppos.write((char*)&posbin, sizeof(uint8_t));
+		posbin = (uint16_t)(pos - pre_pos);
+		fppos.write((char*)&posbin, sizeof(uint16_t));
 
 		//---------------------------------------------// for order
 		if (k == 0 || posbin > 0) { //the first reads or different begin position
@@ -168,13 +164,9 @@ void print_encode(cluster_t *p, std::ofstream& fpref, uint8bit_v& refbin, std::o
 	// if (flag) fprintf(stderr, "p->n: %lu\n", p->n);
 
 	// fprintf(fppos, "%lu ", p->n);
-	size_t num = p->n;
-	uint8_t posbin;
-	for (int i = 0; i < 4; ++i) {
-		posbin = (uint8_t)(num & ((1<<8)-1));
-		fppos.write((char*)&posbin, sizeof(uint8_t));
-        num >>= 8;
-    }
+	uint32_t num = p->n;
+	uint16_t posbin;
+	fppos.write((char*)&num, sizeof(uint32_t));
 
 	for (int k = 0; k < p->n; ++k) {
 		uint64_t y = p->a[k];
@@ -229,8 +221,8 @@ void print_encode(cluster_t *p, std::ofstream& fpref, uint8bit_v& refbin, std::o
 		fprintf(fpdif_char, "%s\n", en_str);
 		// fprintf(fppos, "%d ", (int)((uint32_t)p->a[k]>>1) - pre_pos);
 		// fprintf(fppos, "%d ", (int)(pos - pre_pos));
-		posbin = (uint8_t)(pos - pre_pos);
-		fppos.write((char*)&posbin, sizeof(uint8_t));
+		posbin = (uint16_t)(pos - pre_pos);
+		fppos.write((char*)&posbin, sizeof(uint16_t));
 
 		// fprintf(fpdir, "%d", dir);
 		bit_push(dirbin, fpdir, dir);

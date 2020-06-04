@@ -230,7 +230,6 @@ void pre_process(const char *fn, int f, int w, int k, int b, int n_threads) {
 		// fprintf(stderr, "threshold = %d\n", threshold);
 		// if (threshold >= 12) break;
 	}
-
 	updateSingle();
 	double mm_realtime3 = realtime();
 	fprintf(stdout, "[Stage 2] Real time: %.3f sec;\n", mm_realtime3 - mm_realtime2);
